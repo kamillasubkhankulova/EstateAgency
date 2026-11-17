@@ -1,35 +1,48 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EstateAgency.States;
 using RealEstateAgency.Enums;
+using EstateAgency.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RealEstateAgency.Models
+namespace EstateAgency.Models
 {
-    /// <summary>
-    /// Класс, представляющий объект недвижимости.
-    /// </summary>
     public class Property
     {
-        [Key]
         public int Id { get; set; }
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
+
+        public Address Address { get; set; } = new();
+
         public PropertyType Type { get; set; }
+
         public double Area { get; set; }
         public int Rooms { get; set; }
         public int Floor { get; set; }
         public decimal Price { get; set; }
-        public PropertyStatus Status { get; set; }
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
 
-        /// <summary>
-        /// Метод изменения статуса объекта (согласно диаграмме классов).
-        /// </summary>
-        /// <param name="nextStatus">Новый статус.</param>
-        /// <returns>True, если статус успешно изменен.</returns>
-        public bool ChangeStatus(PropertyStatus nextStatus)
+        /// <summary>Статус хранится в БД (enum из UML-диаграммы).</summary>
+        public PropertyStatus Status { get; set; } = PropertyStatus.Free;
+
+        public int RealtorId { get; set; }
+        public Realtor Realtor { get; set; } = null!;
+
+        public ICollection<Deal> Deals { get; set; } = new List<Deal>();
+
+        /// <summary>Объект состояния, соответствующий текущему статусу.</summary>
+        [NotMapped]
+        public IPropertyState State => PropertyStates.Resolve(Status);
+
+        [NotMapped]
+        public string StateTitle => State.Title;
+
+        [NotMapped]
+        public IReadOnlyCollection<PropertyStatus> AvailableTransitions => State.AllowedTransitions;
+
+        /// <summary>Смена статуса через объект состояния.</summary>
+        public bool ChangeStatus(PropertyStatus next)
         {
-            // TODO: Реализовать логику проверки перехода статусов
-            Status = nextStatus;
+            if (!State.CanTransitionTo(next))
+                return false;
+
+            Status = next;
             return true;
         }
     }

@@ -1,21 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
-namespace RealEstateAgency.Models
+namespace EstateAgency.Models
 {
-    /// <summary>
-    /// Класс, представляющий адрес объекта недвижимости.
-    /// </summary>
+    /// <summary>Адрес — часть объекта недвижимости (композиция).</summary>
+    [Owned]
     public class Address
     {
-        [Key]
-        public int Id { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string House { get; set; }
-        public string Apartment { get; set; }
-        public override string ToString()
-        {
-            return $"{City}, ул. {Street}, д. {House}, кв. {Apartment}";
-        }
+        [Required, MaxLength(100)]
+        public string City { get; set; } = string.Empty;
+
+        [Required, MaxLength(150)]
+        public string Street { get; set; } = string.Empty;
+
+        [Required, MaxLength(20)]
+        public string House { get; set; } = string.Empty;
+
+        [MaxLength(20)]
+        public string Apartment { get; set; } = string.Empty;
+
+        public override string ToString() =>
+            string.IsNullOrWhiteSpace(Apartment)
+                ? $"{City}, ул. {Street}, д. {House}"
+                : $"{City}, ул. {Street}, д. {House}, кв. {Apartment}";
     }
 }

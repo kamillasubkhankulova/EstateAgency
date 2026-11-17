@@ -1,19 +1,21 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using RealEstateAgency.Enums;
+﻿using RealEstateAgency.Enums;
+using EstateAgency.Models;
 
-namespace RealEstateAgency.Models
+namespace EstateAgency.Models
 {
     /// <summary>
-    /// Класс, представляющий клиента агентства недвижимости.
+    /// Клиент — тоже пользователь системы, но с ограниченным доступом:
+    /// видит объекты и только свои сделки.
     /// </summary>
-    public class Client
+    public class Client : User
     {
-        [Key]
-        public int Id { get; set; }
-        public string FullName { get; set; }
-        public string Phone { get; set; }
+        public override string GetRoleName() => "Клиент";
+
         public RequestType RequestType { get; set; }
-        public DateTime RegistrationDate { get; set; }
+
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
+
+        // Только сделки, где клиент является участником
+        public ICollection<Deal> Deals { get; set; } = new List<Deal>();
     }
 }
