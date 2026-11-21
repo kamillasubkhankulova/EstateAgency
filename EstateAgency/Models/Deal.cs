@@ -1,5 +1,4 @@
 ﻿using RealEstateAgency.Enums;
-
 namespace EstateAgency.Models
 {
     public class Deal
@@ -9,8 +8,11 @@ namespace EstateAgency.Models
         public DateTime DealDate { get; set; } = DateTime.Today;
         public decimal Amount { get; set; }
 
-        public DealType Type { get; set; }
         public DealStatus Status { get; set; } = DealStatus.New;
+
+        // Тип сделки — справочник
+        public int DealTypeId { get; set; }
+        public DealType DealType { get; set; } = null!;
 
         public int ClientId { get; set; }
         public Client Client { get; set; } = null!;
@@ -21,7 +23,6 @@ namespace EstateAgency.Models
         public int RealtorId { get; set; }
         public Realtor Realtor { get; set; } = null!;
 
-        /// <summary>Завершение сделки: объект переводится в состояние «Продан».</summary>
         public bool Complete()
         {
             if (Status is DealStatus.Completed or DealStatus.Cancelled)
@@ -34,7 +35,6 @@ namespace EstateAgency.Models
             return true;
         }
 
-        /// <summary>Отмена сделки: бронь снимается, объект снова свободен.</summary>
         public bool Cancel()
         {
             if (Status is DealStatus.Completed)

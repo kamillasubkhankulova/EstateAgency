@@ -1,6 +1,5 @@
 ﻿using EstateAgency.States;
 using RealEstateAgency.Enums;
-using EstateAgency.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EstateAgency.Models
@@ -18,7 +17,7 @@ namespace EstateAgency.Models
         public int Floor { get; set; }
         public decimal Price { get; set; }
 
-        /// <summary>Статус хранится в БД (enum из UML-диаграммы).</summary>
+        /// <summary>Статус — enum, в БД хранится как int.</summary>
         public PropertyStatus Status { get; set; } = PropertyStatus.Free;
 
         public int RealtorId { get; set; }
@@ -26,7 +25,6 @@ namespace EstateAgency.Models
 
         public ICollection<Deal> Deals { get; set; } = new List<Deal>();
 
-        /// <summary>Объект состояния, соответствующий текущему статусу.</summary>
         [NotMapped]
         public IPropertyState State => PropertyStates.Resolve(Status);
 
@@ -36,7 +34,6 @@ namespace EstateAgency.Models
         [NotMapped]
         public IReadOnlyCollection<PropertyStatus> AvailableTransitions => State.AllowedTransitions;
 
-        /// <summary>Смена статуса через объект состояния.</summary>
         public bool ChangeStatus(PropertyStatus next)
         {
             if (!State.CanTransitionTo(next))

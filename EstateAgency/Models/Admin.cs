@@ -1,6 +1,6 @@
 ﻿namespace EstateAgency.Models
 {
-    public class Admin : User
+    public class Admin : Employee
     {
         public override string GetRoleName() => "Администратор";
 

@@ -1,14 +1,11 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace EstateAgency
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        /// <summary>Строка подключения к локальной БД.</summary>
+        public static string ConnectionString { get; } =
+            "Server=(localdb)\\MSSQLLocalDB;Database=EstateAgencyDB;Trusted_Connection=True;";
     }
-
 }

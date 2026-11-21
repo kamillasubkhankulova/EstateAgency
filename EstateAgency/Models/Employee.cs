@@ -7,7 +7,7 @@ namespace EstateAgency.Models
     /// <summary>
     /// Базовый пользователь системы. Наследники: Admin, Realtor, Client.
     /// </summary>
-    public abstract class User
+    public abstract class Employee
     {
         public int Id { get; set; }
 
@@ -23,18 +23,18 @@ namespace EstateAgency.Models
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
 
+        // Связь с ролью идёт от базового класса
+        public int RoleId { get; set; }
+        public Role Role { get; set; } = null!;
+
         public bool Authenticate(string password) => PasswordHash == HashPassword(password);
 
-        /// <summary>Название роли для интерфейса.</summary>
         public abstract string GetRoleName();
 
-        /// <summary>Может добавлять и редактировать объекты.</summary>
         public virtual bool CanManageProperties() => false;
 
-        /// <summary>Может просматривать сделки всех пользователей.</summary>
         public virtual bool CanViewAllDeals() => false;
 
-        /// <summary>Может удалять записи (только администратор).</summary>
         public virtual bool CanDeleteRecords() => false;
 
         public static string HashPassword(string password) =>
