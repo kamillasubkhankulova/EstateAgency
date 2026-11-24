@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace EstateAgency.Models
 {
@@ -27,8 +25,6 @@ namespace EstateAgency.Models
         public int RoleId { get; set; }
         public Role Role { get; set; } = null!;
 
-        public bool Authenticate(string password) => PasswordHash == HashPassword(password);
-
         public abstract string GetRoleName();
 
         public virtual bool CanManageProperties() => false;
@@ -36,8 +32,5 @@ namespace EstateAgency.Models
         public virtual bool CanViewAllDeals() => false;
 
         public virtual bool CanDeleteRecords() => false;
-
-        public static string HashPassword(string password) =>
-            Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password)));
     }
 }
