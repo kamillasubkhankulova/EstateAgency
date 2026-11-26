@@ -25,18 +25,18 @@ namespace EstateAgency.Services
         }
 
         /// <summary>
-        /// Проверяет логин и пароль
+        /// Проверяет логин и пароль. При успехе запоминает пользователя.
         /// </summary>
-        public (bool Success, string? Error, Employee? User) Login(string login, string password)
+        public async Task<(bool Success, string? Error, Employee? User)> LoginAsync(string login, string password)
         {
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
                 return (false, "Введите логин и пароль.", null);
 
             string normalizedLogin = login.Trim();
 
-            Employee? user = _context.Employees
+            Employee? user = await _context.Employees
                 .Include(e => e.Role)
-                .FirstOrDefault(e => e.Login.ToLower() == normalizedLogin.ToLower());
+                .FirstOrDefaultAsync(e => e.Login.ToLower() == normalizedLogin.ToLower());
 
             if (user is null)
                 return (false, "Пользователь с таким логином не найден.", null);
