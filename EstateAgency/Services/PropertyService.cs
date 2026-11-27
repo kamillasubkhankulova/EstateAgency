@@ -64,6 +64,16 @@ namespace EstateAgency.Services
                 .Include(p => p.Realtor)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
+        /// <summary>
+        /// Список риелторов для выпадающего списка
+        /// </summary>
+        public async Task<List<Realtor>> GetRealtorsAsync()
+        {
+            return await _context.Realtors
+                .AsNoTracking()
+                .OrderBy(r => r.FullName)
+                .ToListAsync();
+        }
 
         public async Task AddPropertyAsync(Property property)
         {

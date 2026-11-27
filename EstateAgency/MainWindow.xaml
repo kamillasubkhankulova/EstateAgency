@@ -67,13 +67,18 @@
             </Border>
 
             <Border Grid.Column="1" Background="White">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Выберите раздел в меню слева"
-                               FontSize="18" Foreground="#607D8B"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="WelcomeText" FontSize="13" Foreground="#90A4AE"
-                               Margin="0,8,0,0" HorizontalAlignment="Center"/>
-                </StackPanel>
+                <Grid>
+                    <ContentControl x:Name="ContentHost"/>
+
+                    <StackPanel x:Name="WelcomePanel"
+                                VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="Выберите раздел в меню слева"
+                                   FontSize="18" Foreground="#607D8B"
+                                   HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="WelcomeText" FontSize="13" Foreground="#90A4AE"
+                                   Margin="0,8,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
             </Border>
         </Grid>
     </Grid>

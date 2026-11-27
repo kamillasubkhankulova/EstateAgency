@@ -31,6 +31,18 @@ namespace EstateAgency.Models
         [NotMapped]
         public string StateTitle => State.Title;
 
+        /// <summary>
+        /// Название типа для таблицы
+        /// </summary>
+        [NotMapped]
+        public string TypeTitle => Type switch
+        {
+            PropertyType.Apartment => "Квартира",
+            PropertyType.House => "Дом",
+            PropertyType.Commercial => "Коммерция",
+            _ => Type.ToString()
+        };
+
         [NotMapped]
         public IReadOnlyCollection<PropertyStatus> AvailableTransitions => State.AllowedTransitions;
 

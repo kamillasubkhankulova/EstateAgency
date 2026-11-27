@@ -12,6 +12,7 @@ namespace EstateAgency
     {
         public static IServiceProvider Services { get; private set; } = null!;
 
+
         public static string ConnectionString { get; } =
             "Server=(localdb)\\MSSQLLocalDB;Database=EstateAgencyDB;Trusted_Connection=True;";
 
@@ -41,6 +42,7 @@ namespace EstateAgency
             services.AddScoped<PropertyService>();
             services.AddScoped<ClientService>();
             services.AddScoped<DealService>();
+            services.AddTransient<PropertiesView>();
 
             services.AddTransient<LoginWindow>();
 

@@ -1,0 +1,81 @@
+﻿<Window x:Class="EstateAgency.AddEditPropertyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Объект недвижимости"
+        Height="620" Width="470"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Город:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="CityBox" Grid.Row="0" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Улица:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="StreetBox" Grid.Row="1" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Дом:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="HouseBox" Grid.Row="2" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Квартира:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="ApartmentBox" Grid.Row="3" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Тип:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="TypeCombo" Grid.Row="4" Grid.Column="1" Height="30" Margin="0,6" SelectedIndex="0">
+            <ComboBoxItem Content="Квартира"/>
+            <ComboBoxItem Content="Дом"/>
+            <ComboBoxItem Content="Коммерция"/>
+        </ComboBox>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Площадь, м²:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="AreaBox" Grid.Row="5" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Комнат:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="RoomsBox" Grid.Row="6" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Этаж:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="FloorBox" Grid.Row="7" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Цена, ₽:" VerticalAlignment="Center" Margin="0,6"/>
+        <TextBox x:Name="PriceBox" Grid.Row="8" Grid.Column="1" Height="30" Margin="0,6"
+                 VerticalContentAlignment="Center"/>
+
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Статус:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="StatusCombo" Grid.Row="9" Grid.Column="1" Height="30" Margin="0,6"/>
+
+        <TextBlock Grid.Row="10" Grid.Column="0" Text="Риелтор:" VerticalAlignment="Center" Margin="0,6"/>
+        <ComboBox x:Name="RealtorCombo" Grid.Row="10" Grid.Column="1" Height="30" Margin="0,6"/>
+
+        <StackPanel Grid.Row="11" Grid.ColumnSpan="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button x:Name="SaveButton" Content="Сохранить" Width="120" Height="36"
+                    Margin="0,0,10,0" IsDefault="True" Click="OnSaveClick"/>
+            <Button Content="Отмена" Width="100" Height="36"
+                    IsCancel="True" Click="OnCancelClick"/>
+        </StackPanel>
+    </Grid>
+</Window>
